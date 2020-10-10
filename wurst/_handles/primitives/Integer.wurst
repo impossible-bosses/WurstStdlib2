@@ -44,14 +44,62 @@ public function int.lerp(int target, real alpha) returns int
 public function int.isBetween(int low, int high) returns bool
 	return this >= low and this <= high
 
+function emulateBitAnd(int a, int b) returns int
+	int a2 = a
+	int b2 = b
+	int c = 0
+	for x = 0 to 31
+		c += c
+		if a2 < 0
+			if b2 < 0
+				c += 1
+
+		a2 += a2
+		b2 += b2
+
+	return c
+
+function emulateBitOr(int a, int b) returns int
+	int a2 = a
+	int b2 = b
+	int c = 0
+	for x = 0 to 31
+		c += c
+		if a2 < 0
+			c += 1
+		else if b2 < 0
+			c += 1
+
+		a2 += a2
+		b2 += b2
+
+	return c
+
+function emulateBitXor(int a, int b) returns int
+	int a2 = a
+	int b2 = b
+	int c = 0
+	for x = 0 to 31
+		c += c
+		if a2 < 0
+			if b2 >= 0
+				c += 1
+		else if b2 < 0
+			c += 1
+
+		a2 += a2
+		b2 += b2
+
+	return c
+
 /** Returns the result of a bitwise AND operation performed on this int and the argument int. */
 public function int.bitAnd(int other) returns int
-	return BlzBitAnd(this, other)
+	return emulateBitAnd(this, other)
 
 /** Returns the result of a bitwise OR operation performed on this int and the argument int. */
 public function int.bitOr(int other) returns int
-	return BlzBitOr(this, other)
+	return emulateBitOr(this, other)
 
 /** Returns the result of a bitwise exclusive OR operation performed on this int and the argument int. */
 public function int.bitXor(int other) returns int
-	return BlzBitXor(this, other)
+	return emulateBitXor(this, other)
