@@ -138,6 +138,12 @@ public abstract class CallbackPeriodic
 		let cb = (GetExpiredTimer().getData() castTo thistype)
 		cb.call(cb)
 
+	function getElapsed() returns real
+		return t.getElapsed()
+
+	function getRemaining() returns real
+		return t.getRemaining()
+
 	ondestroy
 		t.release()
 
