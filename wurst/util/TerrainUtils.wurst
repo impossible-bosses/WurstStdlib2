@@ -5,6 +5,8 @@ import Rect
 import MapBounds
 import Wurstunit
 import Colors
+import ObjectIdGenerator
+import MagicFunctions
 
 // Terrain API
 
